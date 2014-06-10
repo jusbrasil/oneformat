@@ -1,0 +1,15 @@
+{
+    "name": "OneFormat",
+    "author": "Mateus Chagas Sousa <mateuschs@gmail.com>",
+    "description": "OneFormat is a service for html parsing, formatting and standardization",
+    "version": "0.1.0",
+    "engines": {
+        "node": ">=0.10.26"
+    },
+    "dependencies": {
+        "jsdom": ">=0.10.6"
+    },
+    "devDependencies": {
+        "mocha": "latest"
+    }
+}
