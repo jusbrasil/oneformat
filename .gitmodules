@@ -1,0 +1,3 @@
+[submodule "vendor/wysihtml5"]
+	path = vendor/wysihtml5
+	url = git@github.com:jusbrasil/wysihtml5.git
