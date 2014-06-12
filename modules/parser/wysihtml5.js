@@ -1,4 +1,4 @@
-var wysihtml_path = "./../../vendor/wysihtml5/dist/wysihtml5-0.5.0pre.js",
+var wysihtml_path = "./../../vendor/wysihtml5-0.5.0pre.js",
     runner_path = "./wysihtml5/runner.js";
 
 var jsdom = require('jsdom'),
