@@ -5,7 +5,7 @@ case $1 in
       npm install
       ;;
   run)
-      node_modules/pm2/bin/pm2 start server.js
+      node_modules/pm2/bin/pm2 start server.js -i max --name JusBrasil-Oneformat
       ;;
   stop) 
       node_modules/pm2/bin/pm2 stop server.js

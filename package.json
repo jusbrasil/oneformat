@@ -17,6 +17,7 @@
         "mocha": "latest",
         "grunt-mocha-cli": "latest",
         "grunt": "latest",
-        "grunt-contrib-watch": "latest"
+        "grunt-contrib-watch": "latest",
+        "superagent": "latest"
     }
 }

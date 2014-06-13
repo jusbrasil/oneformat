@@ -8,7 +8,7 @@ var app = express();
 app.use(bodyParser());
 app.listen(8888);
 
-app.get('/format', function(req, res, next){
+app.post('/format', function(req, res, next){
     var promises = [];
     for(var key in req.body.html){
         promises = promises.concat(new promise(resolver(key, req.body.html[key])));
