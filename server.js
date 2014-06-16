@@ -8,27 +8,20 @@ var app = express();
 app.use(bodyParser());
 app.listen(8888);
 
-app.post('/format', function(req, res, next){
+app.put('/format', function(req, res, next){
     var promises = [];
-    for(var key in req.body.html){
-        promises = promises.concat(new promise(resolver(key, req.body.html[key])));
-    }
+
+    promises = promises.concat(new promise(resolver(req.body.html)));
 
     promise.all(promises).then(function(result){
-        res.send(result);
+        res.send(result[0]);
     });
 });
 
-var resolver = function(key, item){
+var resolver = function(item){
     return function(resolve, reject){
-        var response = {};
         parser.parse(item, function(result, err){
-            if(!err){
-                response[key] = result;
-            } else {
-                response[key] = err;
-            }
-            resolve(response);
+            resolve(result);
         });
     };
 };

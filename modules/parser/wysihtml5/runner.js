@@ -166,7 +166,6 @@ var parserRules = {
         "rename_tag": "span"
       },
       "sup": {
-        "rename_tag": "span"
       },
       "nav": {
         "rename_tag": "div"
@@ -416,7 +415,6 @@ var parserRules = {
         "rename_tag": "span"
       },
       "sub": {
-        "rename_tag": "span"
       }
     },
 
