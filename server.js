@@ -1,28 +1,24 @@
 var express = require('express'),
     parser = require('./modules/parser/wysihtml5'),
-    bodyParser = require('body-parser'),
-    promise = require('promise');
+    promise = require('promise'),
+    multiparty = require('multiparty');
 
-var app = express(); 
+var app = express();
 
-app.use(bodyParser());
 app.listen(8888);
 
 app.put('/format', function(req, res, next){
-    var promises = [];
+    var form = new multiparty.Form();
 
-    promises = promises.concat(new promise(resolver(req.body.html)));
-
-    promise.all(promises).then(function(result){
-        res.send(result[0]);
+    form.parse(req, function(err, fields, files) {
+        if(err) next(err);
+        else {
+          parser.parse(fields['html'][0], function(result, err){
+            if(err) next(err);
+            else {
+              res.send(result);
+            }
+          });
+        }
     });
 });
-
-var resolver = function(item){
-    return function(resolve, reject){
-        parser.parse(item, function(result, err){
-            resolve(result);
-        });
-    };
-};
-
