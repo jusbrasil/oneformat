@@ -5,7 +5,7 @@ var parserRules = {
     },
     "tags": {
       "a": {
-        "rename_tag" : "span"
+//        "rename_tag" : "span"
       },
       "abbr": {
         "rename_tag": "span"
@@ -94,7 +94,7 @@ var parserRules = {
         "rename_tag": "i"
       },
       "tr": {
-        "rename_tag": "p"
+        "rename_tag": "div"
       },
       "strike": {
         "remove": 1
@@ -190,7 +190,7 @@ var parserRules = {
         "remove": 1
       },
       "tbody": {
-        "rename_tag": "span"
+        "rename_tag": "div"
       },
       "dd": {
         "rename_tag": "div"
@@ -231,7 +231,7 @@ var parserRules = {
         "remove": 1
       },
       "table": {
-        "rename_tag": "p"
+        "rename_tag": "div"
       },
       "keygen": {
         "remove": 1
@@ -423,13 +423,16 @@ var parserRules = {
      * For now only the 'rename_tag' and 'remove' actions are supproted
      */
     "selectors" :{
+        "*:empty":{
+          "remove":1
+        },
+        "p > p, div > div, div > p":{
+          "rename_tag":'p'
+        },
         "body > div, blockquote > div":{
           "rename_tag":'p'
         },
-        "p > p":{
-          "rename_tag":'p'
-        },
-        "div > div":{
+        "div":{
           "rename_tag":'p'
         }
     },
@@ -458,6 +461,10 @@ var parserRules = {
      *             The string supports backreferencing for the matched pattern/rule.
      */
     "parser": [
+      {
+        "rule": /\[.*?=.*?\]|\[\/.*?\]/g,
+        "replace": ""
+      },
       {
         "rule": /^\s+|\s+$|\,$/g,
         "replace": function(txt){return "";}
