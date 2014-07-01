@@ -1,11 +1,12 @@
 var express = require('express'),
-    parser = require('./modules/parser/wysihtml5'),
+    config = require('./config.json'),
+    parser = require('./modules/parser/' + config.parser),
     promise = require('promise'),
     multiparty = require('multiparty');
 
 var app = express();
 
-app.listen(8888);
+app.listen(config.port);
 
 app.put('/format', function(req, res, next){
     var form = new multiparty.Form();
