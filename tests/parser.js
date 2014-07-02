@@ -23,9 +23,10 @@ describe('wysihtml parser test', function(){
     it('Single paragraph', function(done){
         var text = "That's supposed to be a single paragraph";
         wysihtml_parser.parse({
+            title: '',
             body : text
         }, function(result, errors){
-            assert.equal(result.body, '<p>' + text + '</p>');
+            assert.equal(result.body.text, '<p>' + text + '</p>');
             done();
         });
     });
@@ -33,9 +34,10 @@ describe('wysihtml parser test', function(){
     it('Multiple paragraphs', function(done){
         var text = '<p>That\'s one paragraph</p><br/>that\'s another';
         wysihtml_parser.parse({
+            title: '',
             body: text
         }, function(result, errors){
-            assert.equal(result.body, '<p>That\'s one paragraph</p><p>that\'s another</p>');
+            assert.equal(result.body.text, '<p>That\'s one paragraph</p><p>that\'s another</p>');
             done();
         });
     });
@@ -43,9 +45,10 @@ describe('wysihtml parser test', function(){
     it('Textual correction', function(done){
         var text = 'wrong,punctuation.tots!!!';
         wysihtml_parser.parse({
+            title: '',
             body: text
         }, function(result, errors){
-            assert.equal(result.body, '<p>Wrong, punctuation. Tots!</p>');
+            assert.equal(result.body.text, '<p>Wrong, punctuation. Tots!</p>');
             done();
         });
     });
@@ -53,9 +56,10 @@ describe('wysihtml parser test', function(){
     it('Auto-linking', function(done){
         var text = 'www.google.com';
         wysihtml_parser.parse({
+            title: '',
             body: text
         }, function(result, errors){
-            assert.equal(result.body, '<p><a href="http://www.google.com">www.google.com</a></p>');
+            assert.equal(result.body.text, '<p><a href="http://www.google.com">www.google.com</a></p>');
             done();
         });
     });
@@ -63,10 +67,31 @@ describe('wysihtml parser test', function(){
     it('Auto-linking to data-media=embed-video', function(done){
         var text = 'www.youtube.com/embed/nTWSqHi3vUk';
         wysihtml_parser.parse({
+            title: '',
             body: text
         }, function(result, errors){
-            assert.equal(result.body, '<p><a href="http://'+ text +'" data-media="embed-video" width="496px" height="278px">http://'+ text +'</a></p>');
+            assert.equal(result.body.text, '<p><a href="http://'+ text +'" data-media="embed-video" width="496px" height="278px">http://'+ text +'</a></p>');
             done();
         });
+    });
+
+    it('', function(done){
+            done();
+        
+    });
+
+    it('', function(done){
+            done();
+        
+    });
+
+    it('', function(done){
+            done();
+        
+    });
+
+    it('', function(done){
+            done();
+        
     });
 });
