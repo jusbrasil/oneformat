@@ -13,13 +13,17 @@ app.put('/format', function(req, res, next){
 
     form.parse(req, function(err, fields, files) {
         if(err) next(err);
-        else {
-          parser.parse(fields['html'][0], function(result, err){
-            if(err) next(err);
-            else {
-              res.send(result);
-            }
-          });
+        else if(!fields.body) {
+            res.status(400).send("You gotta send me some body to parse");
+        } else {
+            fields.body = fields.body[0];
+            fields.title = (fields.title && fields.title[0]) || '';
+            parser.parse(fields, function(result, err){
+                if(err) next(err);
+                else {
+                    res.send(result);
+                }
+            });
         }
     });
 });

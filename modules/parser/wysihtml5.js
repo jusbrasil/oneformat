@@ -1,11 +1,12 @@
 var wysihtml_path = "./../../vendor/wysihtml5-0.5.0pre.js",
-    runner_path = "./wysihtml5/runner.js";
+    runner_path = "./wysihtml5/runner.js",
+    titleParser = require('./wysihtml5/titleParser.js');
 
 var jsdom = require('jsdom'),
     fs = require('fs'),
     html = fs.readFileSync("./modules/parser/wysihtml5/base.html", "utf8");
 
-var parse = function(text, callback){
+var parse = function(doc, callback){
     var result;
     jsdom.env(
         html,
@@ -16,12 +17,23 @@ var parse = function(text, callback){
         function(errors, window){
             if(!errors){
                 var element = window.document.createElement('div');
-                element.innerHTML = window.editor.config.parser(text, window.editor.config.parserRules);
-                result = window.wysihtml5.dom.autoLink(element).innerHTML;
+
+                //Applying html parser and text parser rules
+                element.innerHTML = window.editor.config
+                    .parser(doc.body, window.editor.config.parserRules);
+                
+                result = {
+                    //Autolinking
+                    'body': window.wysihtml5.dom
+                        .autoLink(element).innerHTML,
+                    //Parsing the title
+                    'title': titleParser.parse(doc.title)
+                };
+
+                //cleaning memory
                 window.close();
             } else {
-                console.log(errors);
-                result = false;
+                console.log('Error parsing document:', errors);
             }
             callback(result, errors);
         }
