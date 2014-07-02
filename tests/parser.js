@@ -75,23 +75,30 @@ describe('wysihtml parser test', function(){
         });
     });
 
-    it('', function(done){
+    it('All upper title', function(done){
+        var title = 'A TITLE ALL UPPERCASE';
+        wysihtml_parser.parse({
+            title: title,
+            body: 'whatever'
+        }, function(result, errors){
+            assert.equal(result.title.text, 'A title all uppercase');
             done();
-        
+        });
     });
 
-    it('', function(done){
+    it('Title with tags', function(done){
+        var title = 'A <span>Title with Tags</span>';
+        wysihtml_parser.parse({
+            title: title,
+            body: 'whatever'
+        }, function(result, errors){
+            assert.equal(result.title.text, 'A title with tags');
             done();
-        
+        });
     });
+});
 
-    it('', function(done){
-            done();
-        
-    });
+describe('Full text tests', function(){
 
-    it('', function(done){
-            done();
-        
-    });
+
 });
