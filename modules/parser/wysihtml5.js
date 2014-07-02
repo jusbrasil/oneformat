@@ -21,16 +21,33 @@ var parse = function(doc, callback){
                 //Applying html parser and text parser rules
                 element.innerHTML = window.editor.config
                     .parser(doc.body, window.editor.config.parserRules);
-                
-                result = {
-                    //Autolinking
-                    'body': window.wysihtml5.dom
-                        .autoLink(element).innerHTML,
-                    //Parsing the title
-                    'title': titleParser.parse(doc.title)
-                };
 
-                //cleaning memory
+                //Autolinking
+                var text = window.wysihtml5.dom
+                    .autoLink(element).innerHTML;
+
+                result = {
+                    'body': {
+                        'text' : text,
+                        'totalImages': countHTMLTags('img', text),
+                        'totalLinks': countHTMLTags('a', text),
+                        'upperCaseRatio': upperCaseRatio(text),
+                        'original': {
+                            'totalImages': 
+                                countHTMLTags('img', doc.body),
+                            'totalLinks': countHTMLTags('a', doc.body),
+                            'upperCaseRatio': upperCaseRatio(doc.body)
+                        }
+                    },
+                    //Parsing the title
+                    'title': {
+                        'text' : titleParser.parse(doc.title),
+                        'upperCaseRatio': upperCaseRatio(doc.title),
+                        'totalHTMLTags' : countHTMLTags('', doc.title)   
+                    }
+                };
+                
+                //Cleaning memory
                 window.close();
             } else {
                 console.log('Error parsing document:', errors);
@@ -40,8 +57,21 @@ var parse = function(doc, callback){
     );
 };
 
+var upperCaseRatio = function(text) {
+    var match =  text.match(/[A-ZÇÃÁÂÀÉÊÕÓÔÚÛÜ]/g);
+    var ur = (match && match.length) || 0;
+    return ur/text.replace(' ','').length;
+};
+
+var countHTMLTags = function(tagName, text) {
+    var match = text.match(new RegExp("<"+tagName+".*?>", 'gi'));
+    return (match && match.length) || 0;  
+};
+
 var toString = function(data){
    return Buffer.isBuffer(data) ? data.toString('utf8') : data;
 };
 
 module.exports.parse = parse;
+module.exports.upperCaseRatio = upperCaseRatio;
+module.exports.countHTMLTags = countHTMLTags;
