@@ -96,6 +96,17 @@ describe('wysihtml parser test', function(){
             done();
         });
     });
+
+    it('Title with final dot', function(done){
+        var title = 'A Title with Tags.';
+        wysihtml_parser.parse({
+            title: title,
+            body: 'whatever'
+        }, function(result, errors){
+            assert.equal(result.title.text, 'A title with tags');
+            done();
+        });
+    });
 });
 
 describe('Full text tests', function(){
