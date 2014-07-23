@@ -1,8 +1,8 @@
 {
-    "name": "OneFormat",
+    "name": "oneformat",
     "author": "Mateus Chagas Sousa <mateuschs@gmail.com>",
     "description": "OneFormat is a service for html parsing, formatting and standardization",
-    "version": "0.1.0",
+    "version": "0.1.01dev",
     "engines": {
         "node": ">=0.10.26"
     },
@@ -20,5 +20,8 @@
         "grunt": "latest",
         "grunt-contrib-watch": "latest",
         "superagent": "latest"
+    },
+    "scripts": {
+        "test": "grunt test"
     }
 }
