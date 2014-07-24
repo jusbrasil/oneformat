@@ -7,7 +7,6 @@ var jsdom = require('jsdom'),
     html = fs.readFileSync("./modules/parser/wysihtml5/base.html", "utf8");
 
 var parse = function(doc, callback){
-    var result;
     jsdom.env(
         html,
         [
@@ -15,6 +14,7 @@ var parse = function(doc, callback){
             runner_path
         ],
         function(errors, window){
+            var result;
             if(!errors){
                 var element = window.document.createElement('div');
 
