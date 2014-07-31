@@ -1,4 +1,3 @@
-require('heapdump');
 var express = require('express'),
     config = require('./config.json'),
     parser = require('./modules/parser/' + config.parser),
