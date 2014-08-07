@@ -1,6 +1,17 @@
 #!/bin/bash
 
-PM2="node_modules/pm2/bin/pm2"
+FOREGROUND=""
+ARGS=()
+for arg in "$@"; do
+  if [[ $arg == "-f" ]]; then
+    FOREGROUND="--no-daemon"
+  else
+    ARGS+=( $arg )
+  fi
+done
+
+SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PM2="$SCRIPTPATH/node_modules/pm2/bin/pm2"
 SERVICE="JusBrasil-Oneformat"
 
 RUN_CMD="$PM2 start server.js -i max --name $SERVICE"
@@ -16,7 +27,7 @@ for arg in "$@"; do
     run-foreground)
         $RUN_CMD --no-daemon
         ;;
-    stop) 
+    stop)
         $PM2 stop $SERVICE
         ;;
     restart)
