@@ -10,10 +10,12 @@ for arg in "$@"; do
   fi
 done
 
+CWD=$(pwd)
 SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PM2="$SCRIPTPATH/node_modules/pm2/bin/pm2"
 SERVICE="JusBrasil-Oneformat"
 
+cd $SCRIPTPATH
 for arg in ${ARGS[*]}; do
   case $arg in
     install)
@@ -33,3 +35,4 @@ for arg in ${ARGS[*]}; do
         ;;
   esac
 done
+cd $CWD
