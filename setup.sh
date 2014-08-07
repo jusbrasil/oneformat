@@ -14,27 +14,22 @@ SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PM2="$SCRIPTPATH/node_modules/pm2/bin/pm2"
 SERVICE="JusBrasil-Oneformat"
 
-RUN_CMD="$PM2 start server.js -i max --name $SERVICE"
-
-for arg in "$@"; do
+for arg in ${ARGS[*]}; do
   case $arg in
     install)
         npm install
         ;;
     run)
-        $RUN_CMD
-        ;;
-    run-foreground)
-        $RUN_CMD --no-daemon
+        $PM2 start server.js -i max --name $SERVICE $FOREGROUND
         ;;
     stop)
-        $PM2 stop $SERVICE
+        $PM2 stop $SERVICE $FOREGROUND
         ;;
     restart)
-        $PM2 restart $SERVICE
+        $PM2 restart $SERVICE $FOREGROUND
         ;;
     delete)
-        $PM2 delete $SERVICE --no-daemon
+        $PM2 delete $SERVICE $FOREGROUND
         ;;
   esac
 done
