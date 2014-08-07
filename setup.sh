@@ -1,19 +1,22 @@
 #!/bin/bash
 
+PM2="node_modules/pm2/bin/pm2"
+SERVICE="JusBrasil-Oneformat"
+
 case $1 in
   install)
       npm install
       ;;
   run)
-      node_modules/pm2/bin/pm2 start server.js -i max --name JusBrasil-Oneformat
+      $PM2 start server.js -i max --name $SERVICE
       ;;
   stop) 
-      node_modules/pm2/bin/pm2 stop JusBrasil-Oneformat
+      $PM2 stop $SERVICE
       ;;
   restart)
-      node_modules/pm2/bin/pm2 restart JusBrasil-Oneformat
+      $PM2 restart $SERVICE
       ;;
   delete)
-      node_modules/pm2/bin/pm2 delete JusBrasil-Oneformat
+      $PM2 delete $SERVICE
       ;;
 esac
