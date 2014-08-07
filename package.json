@@ -2,7 +2,7 @@
     "name": "oneformat",
     "author": "Mateus Chagas Sousa <mateuschs@gmail.com>",
     "description": "OneFormat is a service for html parsing, formatting and standardization",
-    "version": "0.1.0-1dev",
+    "version": "0.1.0-alpha.1",
     "repository": {
         "type": "git",
         "url": "http://github.com/jusbrasil/oneformat"
@@ -17,7 +17,8 @@
         "multiparty": ">=3.2.9",
         "promise": ">=5.0.0",
         "pm2": "latest",
-        "string": "latest"
+        "string": "latest",
+        "optimist": "0.6.x"
     },
     "devDependencies": {
         "mocha": "latest",
