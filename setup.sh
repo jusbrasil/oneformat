@@ -23,7 +23,7 @@ for arg in "$@"; do
         $PM2 restart $SERVICE
         ;;
     delete)
-        $PM2 delete $SERVICE
+        $PM2 delete $SERVICE --no-daemon
         ;;
   esac
 done
