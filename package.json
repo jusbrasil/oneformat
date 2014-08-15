@@ -14,7 +14,6 @@
     "dependencies": {
         "jsdom": ">=0.10.6",
         "express": ">=4.4.2",
-        "promise": ">=5.0.0",
         "pm2": "latest",
         "string": "latest",
         "optimist": "0.6.x",
@@ -24,8 +23,7 @@
         "mocha": "latest",
         "grunt-mocha-cli": "latest",
         "grunt": "latest",
-        "grunt-contrib-watch": "latest",
-        "superagent": "latest"
+        "grunt-contrib-watch": "latest"
     },
     "scripts": {
         "test": "grunt test"

@@ -1,7 +1,6 @@
 var express = require('express'),
     config = require('./config.json'),
     parser = require('./modules/parser/' + config.parser),
-    promise = require('promise'),
     multer  = require('multer'),
     bodyParser = require('body-parser');
 
