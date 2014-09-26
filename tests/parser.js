@@ -1,5 +1,4 @@
 var assert = require('assert'),
-    superagent = require('superagent'),
     wysihtml_parser = require('../modules/parser/wysihtml5');
 
 describe('\'/format\' route POST request test', function(){
