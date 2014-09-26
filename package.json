@@ -16,7 +16,6 @@
         "express": ">=4.4.2",
         "pm2": "latest",
         "string": "latest",
-        "optimist": "0.6.x",
         "multer": ">=0.1.x",
         "body-parser": ">=1.6.x"
     },

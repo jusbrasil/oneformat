@@ -8,23 +8,22 @@ var express = require('express'),
 var app = express();
 
 // parse multipart/form-data
-app.use(multer())
+app.use(multer());
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.listen(config.port);
 
-function oneformat(req, res, next){
-    if(!req.body.body) {
-        res.status(400).send("You gotta send me some body to parse");
+function oneformat(req, res, next) {
+    if (!req.body.body) {
+        res.status(400).send('You gotta send me some body to parse');
         return next();
     } else {
-        var fields = req.body;
-        if(!fields.title) fields.title = "";
-        parser.parse(fields, function(result, err){
-            if(err) next(err);
+        req.body.title = req.body.title || '';
+        parser.parse(req.body, function(result, err) {
+            if (err) next(err);
             else {
                 res.send(result);
                 return next();
