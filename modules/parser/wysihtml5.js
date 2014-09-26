@@ -1,21 +1,21 @@
-var wysihtml_path = "./../../vendor/wysihtml5-0.5.0pre.js",
-    runner_path = "./wysihtml5/runner.js",
+var wysihtml_path = './../../vendor/wysihtml5-0.5.0pre.js',
+    runner_path = './wysihtml5/runner.js',
     titleParser = require('./wysihtml5/titleParser.js');
 
 var jsdom = require('jsdom'),
     fs = require('fs'),
-    html = fs.readFileSync("./modules/parser/wysihtml5/base.html", "utf8");
+    html = fs.readFileSync('./modules/parser/wysihtml5/base.html', 'utf8');
 
-var parse = function(doc, callback){
+var parse = function(doc, callback) {
     jsdom.env(
         html,
         [
             wysihtml_path,
             runner_path
         ],
-        function(errors, window){
+        function(errors, window) {
             var result;
-            if(!errors){
+            if (!errors) {
                 var element = window.document.createElement('div');
 
                 //Applying html parser and text parser rules
@@ -33,7 +33,7 @@ var parse = function(doc, callback){
                         'totalLinks': countHTMLTags('a', text),
                         'upperCaseRatio': upperCaseRatio(text),
                         'original': {
-                            'totalImages': 
+                            'totalImages':
                                 countHTMLTags('img', doc.body),
                             'totalLinks': countHTMLTags('a', doc.body),
                             'upperCaseRatio': upperCaseRatio(doc.body)
@@ -43,15 +43,14 @@ var parse = function(doc, callback){
                     'title': {
                         'text' : titleParser.parse(doc.title),
                         'upperCaseRatio': upperCaseRatio(doc.title),
-                        'totalHTMLTags' : countHTMLTags('', doc.title)   
+                        'totalHTMLTags' : countHTMLTags('', doc.title)
                     }
                 };
-                
-                //Cleaning memory
-                window.close();
             } else {
                 console.log('Error parsing document:', errors);
             }
+            //Cleaning memory
+            window.close();
             callback(result, errors);
         }
     );
@@ -65,10 +64,10 @@ var upperCaseRatio = function(text) {
 
 var countHTMLTags = function(tagName, text) {
     var match = text.match(new RegExp("<"+tagName+".*?>", 'gi'));
-    return (match && match.length) || 0;  
+    return (match && match.length) || 0;
 };
 
-var toString = function(data){
+var toString = function(data) {
    return Buffer.isBuffer(data) ? data.toString('utf8') : data;
 };
 
