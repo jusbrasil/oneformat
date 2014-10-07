@@ -17,7 +17,8 @@
         "string": "latest",
         "optimist": "0.6.x",
         "multer": ">=0.1.x",
-        "body-parser": ">=1.6.x"
+        "body-parser": ">=1.6.x",
+        "node-uuid": "1.4.1"
     },
     "devDependencies": {
         "mocha": "latest",
