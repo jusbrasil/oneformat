@@ -22,6 +22,7 @@ log('Started!')
 function oneformat(req, res, next) {
     var requestId = uuid.v1();
     log(requestId, 'Received');
+
     if(!req.body.body) {
         log(requestId, 400, 'Bad request');
         res.status(400).send({
@@ -32,6 +33,7 @@ function oneformat(req, res, next) {
     } else {
         req.body.title = req.body.title || '';
         parser.parse(req.body, function(result, err){
+
             if (err) {
                 log(requestId, 500, 'Parser error');
                 res.status(500).send({

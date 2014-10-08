@@ -12,14 +12,15 @@ var parse = function(doc, callback) {
         ],
         function(errors, window) {
             var result;
+
             if (!errors) {
                 var element = window.document.createElement('div');
 
-                //Applying html parser and text parser rules
+                // Applying html parser and text parser rules
                 element.innerHTML = window.editor.config
                     .parser(doc.body, window.editor.config.parserRules);
 
-                //Autolinking
+                // Autolinking
                 var text = window.wysihtml5.dom.autoLink(element).innerHTML;
 
                 result = {
@@ -35,7 +36,7 @@ var parse = function(doc, callback) {
                             'upperCaseRatio': upperCaseRatio(doc.body)
                         }
                     },
-                    //Parsing the title
+                    // Parsing the title
                     'title': {
                         'text' : titleParser.parse(doc.title),
                         'upperCaseRatio': upperCaseRatio(doc.title),
@@ -45,7 +46,7 @@ var parse = function(doc, callback) {
             } else {
                 console.log('Error parsing document: ', errors);
             }
-            //Cleaning memory
+            // Cleaning memory
             window.close();
             callback(result, errors);
         }
@@ -53,9 +54,9 @@ var parse = function(doc, callback) {
 };
 
 var upperCaseRatio = function(text) {
-    var match =  text.match(/[A-ZÇÃÁÂÀÉÊÕÓÔÚÛÜ]/g);
-    var ur = (match && match.length) || 0;
-    return ur/text.replace(' ','').length;
+    var match =  text.match(/[A-ZÇÃÁÂÀÉÊÕÓÔÚÛÜ]/g),
+        ur = (match && match.length) || 0;
+    return ur / text.replace(' ', '').length;
 };
 
 var countHTMLTags = function(tagName, text) {
