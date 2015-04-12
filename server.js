@@ -3,10 +3,12 @@ var express = require('express'),
     parser = require('./modules/parser/' + config.parser),
     multer  = require('multer'),
     bodyParser = require('body-parser'),
-    uuid = require('node-uuid');
+    uuid = require('node-uuid'),
+    util = require('util');
 
 var app = express(),
-    log = console.log.bind(console, '[' + new Date().toUTCString() + ']');
+    log = console.log.bind(console, '[' + new Date().toUTCString() + ']')
+    port = process.env.PORT || config.port;
 
 // parse multipart/form-data
 app.use(multer());
@@ -15,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.listen(config.port);
+app.listen(port);
 
-log('Started!')
+log(util.format('Started on port %s', port))
 
 function oneformat(req, res, next) {
     var requestId = uuid.v1();
