@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+curlish -i -X PUT -H "Content-Type: multipart/form-data" http://localhost:9000/format -F body="<ex1.txt" -F title="TITULO MUITO LOUCO."
+
