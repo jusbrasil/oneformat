@@ -7,7 +7,7 @@ var express = require('express'),
     util = require('util');
 
 var app = express(),
-    log = console.log.bind(console, '[' + new Date().toUTCString() + ']')
+    log = console.log.bind(console, '[' + new Date().toUTCString() + ']'),
     port = process.env.PORT || config.port;
 
 // parse multipart/form-data
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.listen(port);
 
-log(util.format('Started on port %s', port))
+log(util.format('Started on port %s', port));
 
 function oneformat(req, res, next) {
     var requestId = uuid.v1();
@@ -50,7 +50,7 @@ function oneformat(req, res, next) {
             }
         });
     }
-};
+}
 
 app.route('/format')
    .post(oneformat)
