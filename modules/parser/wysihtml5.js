@@ -1,5 +1,6 @@
-var wysihtml_path = './../../vendor/wysihtml5-0.5.0pre.js',
-    runner_path = './wysihtml5/runner.js',
+var path = require("path"),
+    wysihtml_path = path.resolve(__dirname, '../../vendor/wysihtml5-0.5.0pre.js'),
+    runner_path = path.resolve(__dirname, './wysihtml5/runner.js'),
     titleParser = require('./wysihtml5/titleParser.js'),
     jsdom = require('jsdom');
 
