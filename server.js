@@ -64,7 +64,7 @@ process.on('SIGTERM', function() {
 });
 
 app.get('/_check', function (req, res) {
-    res.send({
+    res.status(200).send({
       status: 'ok',
       version: process.version + '-' + pjson.version
     });

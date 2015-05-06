@@ -4,7 +4,7 @@ var path = require("path"),
     titleParser = require('./wysihtml5/titleParser.js'),
     jsdom = require('jsdom');
 
-var debug = false;
+var debug = !!process.env.DEBUG;
 
 if(debug) {
   var  memwatch = require('memwatch-next');
@@ -29,9 +29,6 @@ if(debug) {
       });
   });
 }
-
-
-
 
 var parse = function(doc, callback) {
     jsdom.env(
