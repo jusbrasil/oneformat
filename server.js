@@ -55,3 +55,9 @@ function oneformat(req, res, next) {
 app.route('/format')
    .post(oneformat)
    .put(oneformat);
+
+process.on('SIGTERM', function() {
+  server.close(function () {
+    process.exit(0);
+  });
+});

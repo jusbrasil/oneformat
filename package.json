@@ -18,6 +18,7 @@
         "multer": "0.1.8",
         "body-parser": "1.12.3",
         "node-uuid": "1.4.3",
+        "memwatch-next": "0.2.3",
         "pm2": "0.12.13"
     },
     "devDependencies": {

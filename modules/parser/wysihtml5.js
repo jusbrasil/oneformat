@@ -4,6 +4,35 @@ var path = require("path"),
     titleParser = require('./wysihtml5/titleParser.js'),
     jsdom = require('jsdom');
 
+var debug = false;
+
+if(debug) {
+  var  memwatch = require('memwatch-next');
+  var util = require('util');
+  var fs = require('fs');
+
+  memwatch.on('leak', function(info) {
+    console.log(info);
+  });
+
+  memwatch.on('stats', function(stats) { 
+      var hd = new memwatch.HeapDiff();
+      console.log(stats);
+      var diff = hd.end();
+      var info = util.inspect(diff, {showHidden: false, depth: null});
+      fs.appendFile('/tmp/debug2.log', info, function(err) {
+        if(err) {
+          return console.log(err);
+        }
+
+        console.log("The file was saved!");
+      });
+  });
+}
+
+
+
+
 var parse = function(doc, callback) {
     jsdom.env(
         '<textarea id="textarea"></textarea>',
