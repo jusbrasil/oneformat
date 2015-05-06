@@ -4,6 +4,7 @@ var express = require('express'),
     multer  = require('multer'),
     bodyParser = require('body-parser'),
     uuid = require('node-uuid'),
+    pjson = require('./package.json'),
     util = require('util');
 
 var app = express(),
@@ -60,4 +61,11 @@ process.on('SIGTERM', function() {
   server.close(function () {
     process.exit(0);
   });
+});
+
+app.get('/_check', function (req, res) {
+    res.send({
+      status: 'ok',
+      version: process.version + '-' + pjson.version
+    });
 });
